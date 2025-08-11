@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-Панель</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	 <style>
+        #sidebarMenu {
+            min-height: 100vh;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .sidebar .nav-link {
+            border-radius: 0;
+            color: #333;
+        }
+
+        .sidebar .nav-link:hover {
+            background:#0e0f0e;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #33cc2e;
+            color: white;
+        }
+
+        .navv {
+            background-color: #0e0f0e;
+			color: white;
+        }
+
+        body {
+            background-color: #1C1E1C;
+        }
+
+        .h22{
+            color: white;
+        }
+
+        .glow-on-hover {
+            width: 120px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            text-decoration: none;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #fff720, #ffff1c, #33cc2e);
+            position: absolute;
+            top: -2px;
+            left:-2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+            color: white
+        }
+
+        .glow-on-hover:active:after {
+            background: transparent;
+        }
+
+        .glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        .gloww {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .gloww:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .sideb {
+            background-color: #0e0f0e;
+        }
+
+
+    .linked{
+        color: #33cc2e;
+        text-decoration: none;
+    }
+
+    .linked:hover{
+        color: #33cc2e;
+        text-decoration: none;
+    }
+
+    .form-controlled {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: white;
+        background-color: #0e0f0e;
+        background-clip: padding-box;
+        border: 1px solid #33cc2e;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-controlled:focus{
+        transform: scale(1.01);
+            box-shadow: 0 0 20px #33cc2e;
+    }
+
+    .h2 {
+        color:  #33cc2e;
+        margin: 0 0 0px 0;
+    }
+
+    p, label {
+         color: white;
+    }
+
+    .butto {
+         margin-top: 20px;
+    }
+
+    .table-responsive {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .table {
+        background-color: #0e0f0e;
+        color: white;
+        margin-bottom: 0;
+    }
+
+    .table th {
+        background-color: #33cc2e;
+        color: white;
+        border-color: #33cc2e;
+    }
+
+    .table td, .table th {
+        padding: 12px 15px;
+        vertical-align: middle;
+        border-color: #2a2e2a;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #2a2e2a;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .nav-marg{
+        margin-top: 20px;
+     }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navv">
+    <div class="container-fluid">
+        <a class="navbar-brand linked" href="/">Дикая кудза</a>
+        <div class="d-flex align-items-center">
+            <span class="me-3">Привет, админ!</span>
+            <button class="glow-on-hover" type="button"><a href="{{ url_for('home') }}" class="gloww">Выход</a></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Admin Panel Layout -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar Menu -->
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sideb sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item nav-marg">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <span data-feather="home"></span>
+                            Редактор
+                        </a>
+                    </li>
+                    <li class="nav-item nav-marg">
+                        <a class="nav-link active" aria-current="page" href="/admin.html">
+                            <span data-feather="home"></span>
+                            Создать карточку
+                        </a>
+                    </li>
+                    <li class="nav-item nav-marg">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('view_orders') }}">
+                            <span data-feather="home"></span>
+                            Смотреть заказы
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Список заказов</h1>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Дом</th>
+                        <th scope="col">Фигурка</th>
+                        <th scope="col">Ссылка на Google Doc</th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order[0] }}</td>
+                        <td>{{ order[1] }}</td>
+                        <td>{{ order[2] }}</td>
+                        <td>{{ order[3] }}</td>
+                        <td>
+                            {% if order[4] %}
+                            <a href="{{ order[4] }}" target="_blank" class="linked">Открыть</a>
+                            {% else %}
+                            Нет ссылки
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="glow-on-hover" style="width: 100px; height: 30px; font-size: 12px;">
+                                <a href="#" class="gloww">Удалить</a>
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">Нет заказов</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

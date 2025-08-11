@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .body {
+        padding: 40px 0 0 0;
+        background-color: #1C1E1C;
+        color: white;
+    }
+
+    h2 {
+        color:  #33cc2e;
+        margin: 0 0 0px 0;
+    }
+
+    footer {
+			background-color: #0e0f0e;
+			color: white;
+	}
+
+    .linked{
+        color: #33cc2e;
+    }
+
+    .linked:hover{
+        color: #33cc2e;
+        text-decoration: none;
+    }
+
+    .form-controlled {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: white;
+        background-color: #0e0f0e;
+        background-clip: padding-box;
+        border: 1px solid #33cc2e;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-controlled:focus{
+        transform: scale(1.01);
+            box-shadow: 0 0 20px #33cc2e;
+    }
+
+    .glow-on-hover {
+            width: 220px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #fff720, #ffff1c, #33cc2e);
+            position: absolute;
+            top: -2px;
+            left:-2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+            color: white
+        }
+
+        .glow-on-hover:active:after {
+            background: transparent;
+        }
+
+        .glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }    
+
+
+</style>
+    <head>
+        <meta charset="UTF-8">
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body class="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Регистрация</h2>
+                <p>Заполните эту форму для создания акаунта.</p>
+
+                <!-- Добавляем отображение flash-сообщений -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form action="{{ url_for('register') }}" method="post">
+                    <div class="form-group">
+                        <label>Имя пользователя</label>  <!-- Измените с email на username -->
+                        <input type="text" name="username" class="form-controlled" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" name="password" class="form-controlled" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Подтверждение пароля</label>
+                        <input type="password" name="confirm_password" class="form-controlled" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="glow-on-hover" value="Зарегистрироваться">
+                    </div>
+                    <p>Уже есть аккаунт? <a href="{{ url_for('admin_login') }}" class="linked">Войдите в аккаунт здесь</a>.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted">© 2023-2025 Все права защищены. ООО "Дикая Кудза".</span>
+    </div>
+</footer>
+</html>

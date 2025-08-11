@@ -1,0 +1,25 @@
+{% extends 'base2.html' %} {% block content%}
+
+
+<section id="cards" class="container mt-4">
+    <div class="row">
+     <h2 class="someh2">Сейчас в продаже</h2>
+{% for card in card_list %}
+
+        <div class="col-md-4">
+			<div class="card">
+				<img src="{{ card.image_url }}" class="card-img-top rounded-circle mx-auto mt-3"
+				     alt=" {{ card.title }}" style="width: 150px; height: 150px; object-fit: cover;">
+				<div class="card-body">
+					<h5 class="card-title">{{ card.title }}</h5>
+					<p class="card-text">{{ card.description }}</p>
+					<button class="glow-on-hover" type="button"><a href="{{ url_for('order') }}" class="linked">Сделать заказ</a></button>
+				</div>
+			</div>
+		</div>
+
+{% endfor %}
+    </div>
+</section>
+
+{% endblock %}
